@@ -12,7 +12,7 @@ public class Product {
 
     private String name;
     private String description;
-    private float price;
+    private Double price;
     private String category;
     private Integer shopID;
     private int stock;
@@ -67,11 +67,11 @@ public class Product {
         this.stock = stock;
     }
 
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
