@@ -44,4 +44,51 @@ public class UserController {
       public List<User> searchUsersByName(@RequestParam(value = "name") String name) {
           return userRepository.findByNameContaining(name);
       }
+      @PostMapping("/signup")
+      public ResponseEntity<?> signupUser(@RequestBody Map<String, String> signupData) {
+          String name = signupData.get("name");
+          String email = signupData.get("email");
+          String password = signupData.get("password");
+          String salt = signupData.get("salt");
+  
+          if (email == null || password == null || salt == null) {
+              return ResponseEntity.badRequest().body("Missing email, password, or salt.");
+          }
+  
+          User newUser = new User();
+          newUser.setName(name);
+          newUser.setEmail(email);
+          newUser.setPassword(password);
+          newUser.setAdmin(false);
+          newUser.setSalt(salt); // Store salt with user record
+          userRepository.save(newUser);
+          userRepository.save(newUser);
+  
+          return ResponseEntity.ok("User created successfully.");
+      }
+  
+      // Update an existing user by ID
+      @PutMapping("/users/update")
+      public ResponseEntity<String> updateUser(@RequestParam("userID") Integer userID, @RequestBody Map<String, Object> updatedDetails) {
+  
+          Optional<User> optionalUser = userRepository.findById(userID);
+          if (optionalUser.isPresent()) {
+              User user = optionalUser.get();
+  
+              // Update fields only if present in the request body
+              if (updatedDetails.containsKey("name")) {
+                  user.setName((String) updatedDetails.get("name"));
+              }
+              if (updatedDetails.containsKey("password")) {
+                  user.setPassword((String) updatedDetails.get("password"));
+                  user.setSalt((String) updatedDetails.get("salt"));
+              }
+  
+              userRepository.save(user);
+              return ResponseEntity.ok("User updated successfully");
+          } else {
+              return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+          }
+      }
+  
 }
