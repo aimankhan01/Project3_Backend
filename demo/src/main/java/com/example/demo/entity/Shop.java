@@ -9,8 +9,10 @@ import java.util.Objects;
 @Entity
 @Table(name = "shop")
 public class Shop {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer shopID;
+    
     private String name;
 
     

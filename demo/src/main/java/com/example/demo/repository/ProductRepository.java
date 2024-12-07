@@ -9,12 +9,12 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>{
      @Query("SELECT p " +
-            "FROM Products p " +
+            "FROM Product p " +
             "WHERE p.name LIKE CONCAT('%', :search_term, '%')")
-    List<Product> findProductsByName(String name);
+    List<Product> findProductsByName(@Param("search_term")String name);
 
     @Query("SELECT p " +
-        "FROM Products p " +
+        "FROM Product p " +
         "WHERE p.shopID = :shopID")
     List<Product> findProductsByShop(Integer shopID);
 }
