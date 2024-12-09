@@ -71,6 +71,16 @@ public ResponseEntity<String> test() {
   
           return ResponseEntity.ok("User created successfully.");
       }
+
+      @PostMapping("/testUser")
+      public void testUser() {
+        User newUser = new User();
+        newUser.setName("xedi");
+        newUser.setEmail("b@gmail.com");
+        newUser.setPassword("12345");
+        newUser.setAdmin(false);
+        userRepository.save(newUser);
+      }
   
       // Update an existing user by ID
       @PutMapping("/users/update")
@@ -95,5 +105,7 @@ public ResponseEntity<String> test() {
               return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
           }
       }
+
+     
   
 }
