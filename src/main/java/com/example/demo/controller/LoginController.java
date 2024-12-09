@@ -1,19 +1,19 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.*;
-import com.example.demo.repository.*;
-import org.apache.tomcat.util.json.JSONParser;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.web.bind.annotation.*;
+// import com.example.demo.entity.*;
+// import com.example.demo.repository.*;
+// import org.apache.tomcat.util.json.JSONParser;
+// import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.http.ResponseEntity;
+// import org.springframework.security.crypto.bcrypt.BCrypt;
+// import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-import java.util.Optional;
-import java.util.HashMap;
+// import java.util.Map;
+// import java.util.Optional;
+// import java.util.HashMap;
 
-@RestController
-@RequestMapping("/login")
+// @RestController
+// @RequestMapping("/login")
 public class LoginController {
 
 //     private final UserRepository userRepository;
