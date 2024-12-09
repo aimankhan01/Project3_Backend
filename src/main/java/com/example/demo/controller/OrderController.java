@@ -36,7 +36,7 @@ public class OrderController {
       }
   
       // Get all Orders by user ID
-      @GetMapping("/user")
+      @GetMapping("/orderById")
       public List<Orders> getOrdersByUserId(@RequestParam(value = "userID") Integer userID) {
           return OrderRepository.findOrderByUserID(userID);
       }
