@@ -28,6 +28,11 @@ public class UserController {
         return userRepository.findAll();
     }
 
+    @GetMapping("/test")
+public ResponseEntity<String> test() {
+    return ResponseEntity.ok("Hello, world!");
+}
+
     // Get a user by ID
     @GetMapping("/user")
     public Optional<User> getUserById(@RequestParam(value = "userID") Integer userID) {
