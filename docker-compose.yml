@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  mariadb:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: sb79lniddbsyo4pm
+      MYSQL_DATABASE: nxoeu4xvyhp8cy1j
+    ports:
+      - "3306:3306"
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://iu51mf0q32fkhfpl.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/nxoeu4xvyhp8cy1j
+      SPRING_DATASOURCE_USERNAME: aoqkt4mnqnbknlr6
+      SPRING_DATASOURCE_PASSWORD: sb79lniddbsyo4pm
+    depends_on:
+      - mariadb
+
+volumes:
+  mariadb_data:

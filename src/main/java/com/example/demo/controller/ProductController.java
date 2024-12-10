@@ -45,6 +45,18 @@ public class ProductController {
           return ProductRepository.findProductsByName(name);
       }
 
+      // Search for Products by shop 
+      @GetMapping("/products/search/shop")
+      public List<Product> searchProductsByShop(Integer shopID) {
+          return ProductRepository.findProductsByShop(shopID);
+      }
+
+      // Search for Products by category 
+      @GetMapping("/products/search/category")
+      public List<Product> searchProductsByShop(String category) {
+          return ProductRepository.findProductsByCategory(category);
+      }
+
       @PutMapping("/items/update")
       public ResponseEntity<String> updateProduct(@RequestParam Integer productID,
                                                   @RequestParam(required = false) String name,
