@@ -55,10 +55,9 @@ public ResponseEntity<String> test() {
           String name = signupData.get("name");
           String email = signupData.get("email");
           String password = signupData.get("password");
-          String salt = signupData.get("salt");
   
           if (email == null || password == null || salt == null) {
-              return ResponseEntity.badRequest().body("Missing email, password, or salt.");
+              return ResponseEntity.badRequest().body("Missing email, password");
           }
   
           User newUser = new User();
@@ -66,7 +65,6 @@ public ResponseEntity<String> test() {
           newUser.setEmail(email);
           newUser.setPassword(password);
           newUser.setAdmin(false);
-          newUser.setSalt(salt); // Store salt with user record
           userRepository.save(newUser);
           userRepository.save(newUser);
   
