@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:8082")
+@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8082"})
 public class ProductController {
 
     private final ProductRepository ProductRepository;
