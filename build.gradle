@@ -21,7 +21,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // For JPA support
 	implementation 'org.mariadb.jdbc:mariadb-java-client:3.5.0' // MariaDB JDBC Driver
 	implementation 'mysql:mysql-connector-java:8.0.33'
-	implementation 'org.springframework.boot:spring-boot-starter-security' // For Bcrypt support
+	
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
