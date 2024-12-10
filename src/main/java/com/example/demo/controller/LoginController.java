@@ -12,6 +12,7 @@ import java.util.Optional;
 import java.util.HashMap;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8082"})
 @RequestMapping("/login")
 public class LoginController {
 
