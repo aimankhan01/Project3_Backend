@@ -47,13 +47,13 @@ public class ProductController {
 
       // Search for Products by shop 
       @GetMapping("/products/search/shop")
-      public List<Product> searchProductsByShop(Integer shopID) {
-          return ProductRepository.findProductsByShop(shopID);
+      public List<Product> searchProductsByShop(String name) {
+          return ProductRepository.findProductsByShop(name);
       }
 
       // Search for Products by category 
       @GetMapping("/products/search/category")
-      public List<Product> searchProductsByShop(String category) {
+      public List<Product> searchProductsByCategory(String category) {
           return ProductRepository.findProductsByCategory(category);
       }
 

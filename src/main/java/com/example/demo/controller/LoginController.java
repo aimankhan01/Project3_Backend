@@ -36,7 +36,7 @@ public class LoginController {
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            if (user.getPassword().equals(password))) {
+            if (user.getPassword().equals(password)) {
                 String jsonResponse = String.format("{\"userID\":\"%s\",\"name\":\"%s\"}", user.getUserID(), user.getName());
                 return ResponseEntity.ok(jsonResponse);
             } else {
