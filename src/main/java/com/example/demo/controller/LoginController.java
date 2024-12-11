@@ -24,29 +24,43 @@ public class LoginController {
     }
 
     // Login a user
-    @PostMapping()
-    public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
-        String email = loginData.get("email");
-        String password = loginData.get("password");
+   @PostMapping()
+public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
+    String email = loginData.get("email");
+    String password = loginData.get("password");
 
-        if (email == null || password == null) {
-            return ResponseEntity.badRequest().body("Email or password is missing.");
-        }
+    // Add logging
+    System.out.println("Login attempt with email: " + email);
 
+    if (email == null || password == null) {
+        System.err.println("Email or password is missing.");
+        return ResponseEntity.badRequest().body("Email or password is missing.");
+    }
+
+    try {
         Optional<User> optionalUser = userRepository.findByEmail(email);
-
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
             if (user.getPassword().equals(password)) {
-                String jsonResponse = String.format("{\"userID\":\"%s\",\"name\":\"%s\",\"email\":\"%s\"}", user.getUserID(), user.getName(), user.getEmail());
+                String jsonResponse = String.format(
+                    "{\"userID\":\"%s\",\"name\":\"%s\",\"email\":\"%s\"}",
+                    user.getUserID(), user.getName(), user.getEmail()
+                );
                 return ResponseEntity.ok(jsonResponse);
             } else {
+                System.err.println("Invalid password for email: " + email);
                 return ResponseEntity.status(401).body("Invalid password.");
             }
         } else {
+            System.err.println("User not found for email: " + email);
             return ResponseEntity.status(404).body("User not found.");
         }
+    } catch (Exception e) {
+        System.err.println("An unexpected error occurred: " + e.getMessage());
+        e.printStackTrace();
+        return ResponseEntity.status(500).body("An unexpected error occurred.");
     }
+}
 
    @PostMapping("/admin")
    public ResponseEntity<Map<String, String>> adminLogin(@RequestBody Map<String, String> loginData) {
