@@ -81,15 +81,12 @@ public ResponseEntity<String> test() {
         userRepository.save(newUser);
       }
   
-      // Update an existing user by ID
-      @PutMapping("/users/update")
+     @PutMapping("/users/update")
 public ResponseEntity<String> updateUser(@RequestParam("userID") Integer userID, @RequestBody Map<String, Object> updatedDetails) {
-
+    System.out.println("Updated details: " + updatedDetails); // Log the incoming data
     Optional<User> optionalUser = userRepository.findById(userID);
     if (optionalUser.isPresent()) {
         User user = optionalUser.get();
-
-        // Update fields only if present in the request body
         if (updatedDetails.containsKey("name")) {
             user.setName((String) updatedDetails.get("name"));
         }
@@ -99,14 +96,12 @@ public ResponseEntity<String> updateUser(@RequestParam("userID") Integer userID,
         if (updatedDetails.containsKey("password")) {
             user.setPassword((String) updatedDetails.get("password"));
         }
-
-        userRepository.save(user);
+        userRepository.save(user); // Save the updated user
         return ResponseEntity.ok("User updated successfully");
     } else {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
 }
-
      
   
 }
