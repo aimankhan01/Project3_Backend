@@ -83,26 +83,29 @@ public ResponseEntity<String> test() {
   
       // Update an existing user by ID
       @PutMapping("/users/update")
-      public ResponseEntity<String> updateUser(@RequestParam("userID") Integer userID, @RequestBody Map<String, Object> updatedDetails) {
-  
-          Optional<User> optionalUser = userRepository.findById(userID);
-          if (optionalUser.isPresent()) {
-              User user = optionalUser.get();
-  
-              // Update fields only if present in the request body
-              if (updatedDetails.containsKey("name")) {
-                  user.setName((String) updatedDetails.get("name"));
-              }
-              if (updatedDetails.containsKey("password")) {
-                  user.setPassword((String) updatedDetails.get("password"));
-              }
-  
-              userRepository.save(user);
-              return ResponseEntity.ok("User updated successfully");
-          } else {
-              return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-          }
-      }
+public ResponseEntity<String> updateUser(@RequestParam("userID") Integer userID, @RequestBody Map<String, Object> updatedDetails) {
+
+    Optional<User> optionalUser = userRepository.findById(userID);
+    if (optionalUser.isPresent()) {
+        User user = optionalUser.get();
+
+        // Update fields only if present in the request body
+        if (updatedDetails.containsKey("name")) {
+            user.setName((String) updatedDetails.get("name"));
+        }
+        if (updatedDetails.containsKey("email")) {
+            user.setEmail((String) updatedDetails.get("email"));
+        }
+        if (updatedDetails.containsKey("password")) {
+            user.setPassword((String) updatedDetails.get("password"));
+        }
+
+        userRepository.save(user);
+        return ResponseEntity.ok("User updated successfully");
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    }
+}
 
      
   
