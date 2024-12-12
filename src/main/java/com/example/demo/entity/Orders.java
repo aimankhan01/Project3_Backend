@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -12,8 +13,8 @@ public class Orders {
     private Integer orderID;
     
     private Integer userID;
-    private String cartItems; // Stores list of items in cart, serialized or as a JSON string
-    private Double total; // Total amount of the order
+    private List<String> cartItems;
+    private Double total;
 
     // Getters and Setters
 
@@ -25,11 +26,11 @@ public class Orders {
         this.userID = userID;
     }
 
-    public String getCartItems() {
+    public List<String> getCartItems() {
         return cartItems;
     }
 
-    public void setCartItems(String cartItems) {
+    public void setCartItems(List<String> cartItems) {
         this.cartItems = cartItems;
     }
 
@@ -45,16 +46,23 @@ public class Orders {
         return orderID;
     }
 
+    public void setOrderID(Integer orderID) {
+        this.orderID = orderID;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Orders)) return false;
         Orders orders = (Orders) o;
-        return Objects.equals(orderID, orders.orderID);
+        return Objects.equals(orderID, orders.orderID) &&
+               Objects.equals(userID, orders.userID) &&
+               Objects.equals(cartItems, orders.cartItems) &&
+               Objects.equals(total, orders.total);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderID);
+        return Objects.hash(orderID, userID, cartItems, total);
     }
 }
