@@ -42,9 +42,15 @@ public class OrderController {
 
     // Create a new Order
     @PostMapping("/create")
-    public ResponseEntity<Orders> createOrder(@RequestBody Orders order) {
+    public ResponseEntity<Orders> createOrder(@RequestBody CartData cartData) {
+        // Create a new Orders object from cart data
+        Orders newOrder = new Orders();
+        newOrder.setUserID(cartData.getUserID());
+        newOrder.setItems(cartData.getCartItems()); // Assuming your Orders entity has a list of Items
+        newOrder.setTotal(cartData.getTotal());
+
         // Save the new Order to the repository
-        Orders savedOrder = orderRepository.save(order);
+        Orders savedOrder = orderRepository.save(newOrder);
         // Return the saved Order as JSON response
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
