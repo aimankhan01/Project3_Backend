@@ -43,8 +43,8 @@ public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
             User user = optionalUser.get();
             if (user.getPassword().equals(password)) {
                 String jsonResponse = String.format(
-                    "{\"userID\":\"%s\",\"name\":\"%s\",\"email\":\"%s\",\"password\":\"%s\"}",
-                    user.getUserID(), user.getName(), user.getEmail(), user.getPassword()
+                    "{\"userID\":\"%s\",\"name\":\"%s\",\"email\":\"%s\",\"password\":\"%s\",\"role\":\"%s\"}",
+                    user.getUserID(), user.getName(), user.getEmail(), user.getPassword(), user.getAdmin()
                 );
                 return ResponseEntity.ok(jsonResponse);
             } else {
