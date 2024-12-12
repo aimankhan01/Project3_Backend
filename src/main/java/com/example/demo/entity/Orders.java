@@ -12,8 +12,8 @@ public class Orders {
     private Integer orderID;
     
     private Integer userID;
-    private String cartItems; // Updated to store the list of items in the cart as a JSON or serialized string
-    private Double total; // Total price of the order
+    private String cartItems; // Stores list of items in cart, serialized or as a JSON string
+    private Double total; // Total amount of the order
 
     // Getters and Setters
 
@@ -45,15 +45,6 @@ public class Orders {
         return orderID;
     }
 
-    public Integer getProductID() {
-        return productID;
-    }
-
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
-    }
-
-    // Override equals and hashCode based on your needs
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
