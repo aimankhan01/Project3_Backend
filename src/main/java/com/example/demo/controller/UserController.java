@@ -96,6 +96,9 @@ public ResponseEntity<String> updateUser(@RequestParam("userID") Integer userID,
         if (updatedDetails.containsKey("password")) {
             user.setPassword((String) updatedDetails.get("password"));
         }
+        if (updatedDetails.containsKey("role")) {
+            user.setAdmin(Boolean.parseBoolean((String) updatedDetails.get("role")));
+        }
         userRepository.save(user); // Save the updated user
         return ResponseEntity.ok("User updated successfully");
     } else {
