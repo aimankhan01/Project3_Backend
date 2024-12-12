@@ -43,8 +43,9 @@ public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
             User user = optionalUser.get();
             if (user.getPassword().equals(password)) {
                 String jsonResponse = String.format(
-                    "{\"userID\":\"%s\",\"name\":\"%s\",\"email\":\"%s\",\"password\":\"%s\"}",
-                    user.getUserID(), user.getName(), user.getEmail(), user.getPassword()
+                   
+                    "{\"userID\":\"%s\",\"name\":\"%s\",\"email\":\"%s\",\"password\":\"%s\",\"role\":\"%s\"}",
+                    user.getUserID(), user.getName(), user.getEmail(), user.getPassword(), user.getAdmin()
                 );
                 return ResponseEntity.ok(jsonResponse);
             } else {
@@ -78,12 +79,12 @@ public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
 
     if (optionalUser.isPresent()) {
         User user = optionalUser.get();
-        
+
         if (!user.getAdmin()) {
             response.put("error", "Access denied. Admin privileges required.");
             return ResponseEntity.status(403).body(response);
         }
-        
+
         if (user.getPassword().equals((password))) {
             response.put("message", "Welcome Admin " + user.getName() + "!");
             return ResponseEntity.ok(response);
