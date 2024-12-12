@@ -17,11 +17,8 @@ import java.util.Optional;
 public class OrderController {
 
     private final OrderRepository orderRepository;
-    private final OrderRepository orderRepository;
 
     @Autowired
-    public OrderController(OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
