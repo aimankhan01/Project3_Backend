@@ -43,14 +43,20 @@ public class OrderController {
     }
 
     // Create a new Order
-    @PostMapping("/create")
-    public ResponseEntity<Orders> createOrder(@RequestBody Orders newOrder) {
-        // Save the new Order to the repository
-        Orders savedOrder = orderRepository.save(newOrder);
+@PostMapping("/create")
+public ResponseEntity<Orders> createOrder(@RequestParam(value = "userID") Integer userID,
+                                          @RequestBody OrderRequest orderRequest) { // OrderRequest should be a new class
+    Orders newOrder = new Orders();
+    newOrder.setUserID(userID);
+    newOrder.setCartItems(orderRequest.getCartItems());
+    newOrder.setTotal(orderRequest.getTotal());
 
-        // Return the saved Order as JSON response
-        return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
-    }
+    // Save the new Order to the repository
+    Orders savedOrder = orderRepository.save(newOrder);
+
+    // Return the saved Order as JSON response
+    return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
+}
 
     // Update an existing Order
     @PatchMapping("/update")
