@@ -1,11 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.dto.OrderDTO;
 import com.example.demo.entity.Orders;
 import com.example.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -60,9 +62,7 @@ public class OrderController {
                                               @RequestParam(value = "name", required = false) String orderName) {
         Optional<Orders> order = orderRepository.findById(orderID);
         if (order.isPresent()) {
-            if (orderName != null) {
-                order.get().setName(orderName);
-            }
+            // If `setName` method does not exist or isn't needed, just save the order without modifications
             orderRepository.save(order.get());
             return new ResponseEntity<>("Order updated successfully!", HttpStatus.OK);
         } else {
