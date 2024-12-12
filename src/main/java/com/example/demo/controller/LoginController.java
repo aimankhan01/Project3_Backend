@@ -97,3 +97,4 @@ public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
         return ResponseEntity.status(404).body(response);
     }
   }
+}
