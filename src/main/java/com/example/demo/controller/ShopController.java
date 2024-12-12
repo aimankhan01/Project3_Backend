@@ -45,4 +45,11 @@ public class ShopController {
       public List<Shop> searchShopsByName(@RequestParam(value = "name") String name) {
           return ShopRepository.findShopByName(name);
       }
+
+      // Add a Shop
+@PostMapping("/shops/add")
+public ResponseEntity<Shop> addShop(@RequestBody Shop newShop) {
+    Shop savedShop = ShopRepository.save(newShop);
+    return new ResponseEntity<>(savedShop, HttpStatus.CREATED);
+}
 }
