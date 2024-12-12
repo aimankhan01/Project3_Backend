@@ -13,31 +13,11 @@ import java.util.HashMap;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:8081", "http://localhost:8082"})
-@RequestMapping("/login")
-public class LoginController {
 
-    private final UserRepository userRepository;
 
-    @Autowired
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
-    // Login a user
-   @PostMapping()
-public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
-    String email = loginData.get("email");
-    String password = loginData.get("password");
 
-    // Add logging
-    System.out.println("Login attempt with email: " + email);
-
-    if (email == null || password == null) {
-        System.err.println("Email or password is missing.");
-        return ResponseEntity.badRequest().body("Email or password is missing.");
-    }
-
-    try {
+try {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
@@ -60,7 +40,8 @@ public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
         e.printStackTrace();
         return ResponseEntity.status(500).body("An unexpected error occurred.");
     }
-}
+
+
 
    @PostMapping("/admin")
    public ResponseEntity<Map<String, String>> adminLogin(@RequestBody Map<String, String> loginData) {
@@ -96,4 +77,30 @@ public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
         return ResponseEntity.status(404).body(response);
     }
   }
+
+  @RequestMapping("/login")
+public class LoginController {
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public LoginController(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    // Login a user
+   @PostMapping()
+public ResponseEntity<?> loginUser(@RequestBody Map<String, String> loginData) {
+    String email = loginData.get("email");
+    String password = loginData.get("password");
+
+    // Add logging
+    System.out.println("Login attempt with email: " + email);
+
+    if (email == null || password == null) {
+        System.err.println("Email or password is missing.");
+        return ResponseEntity.badRequest().body("Email or password is missing.");
+    }
+
+    
 }
