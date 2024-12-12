@@ -42,19 +42,15 @@ public class OrderController {
         return orderRepository.findOrderByUserID(userID);
     }
 
-    // Create a new Order
-@PostMapping("/create")
+    @PostMapping("/create")
 public ResponseEntity<Orders> createOrder(@RequestParam(value = "userID") Integer userID,
-                                          @RequestBody OrderRequest orderRequest) { // OrderRequest should be a new class
+                                          @RequestBody OrderRequest orderRequest) {
     Orders newOrder = new Orders();
     newOrder.setUserID(userID);
     newOrder.setCartItems(orderRequest.getCartItems());
     newOrder.setTotal(orderRequest.getTotal());
 
-    // Save the new Order to the repository
     Orders savedOrder = orderRepository.save(newOrder);
-
-    // Return the saved Order as JSON response
     return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
 }
 
@@ -84,4 +80,26 @@ public ResponseEntity<Orders> createOrder(@RequestParam(value = "userID") Intege
             return new ResponseEntity<>("Order not found!", HttpStatus.NOT_FOUND);
         }
     }
+
+    public class OrderRequest {
+    private List<String> cartItems;
+    private Double total;
+
+    // Getters and Setters
+    public List<String> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(List<String> cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
+    }
+}
 }
