@@ -42,6 +42,17 @@ public class ProductController {
       public void deleteProduct(@RequestParam(value = "productID") Integer ProductID) {
           ProductRepository.deleteById(ProductID);
       }
+
+      // Add a new Product
+@PostMapping("/products/add")
+public ResponseEntity<String> addProduct(@RequestBody Product product) {
+    try {
+        Product savedProduct = ProductRepository.save(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Product added successfully.");
+    } catch (Exception e) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error adding product.");
+    }
+}
   
       // Search for Products by name 
       @GetMapping("/products/search")
