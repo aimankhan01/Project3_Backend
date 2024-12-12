@@ -47,7 +47,7 @@ public ResponseEntity<Orders> createOrder(@RequestBody Orders newOrderData) {
     // Create a new Orders object from the request body
     Orders newOrder = new Orders();
     newOrder.setUserID(newOrderData.getUserID());
-    newOrder.setProductID(newOrderData.getProductID());
+    newOrder.setProductID(newOrderData.getProductID());  // Update this line if your entity has the setter method
     newOrder.setName(newOrderData.getName()); // Assuming Orders entity has a name field
 
     // Save the new Order to the repository

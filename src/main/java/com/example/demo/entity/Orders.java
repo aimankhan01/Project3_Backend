@@ -20,7 +20,6 @@ public class Orders {
 
     public Integer getUserID() {
         return userID;
-    
     }
 
     public void setUserID(Integer userID) {
@@ -43,9 +42,7 @@ public class Orders {
         return productID;
     }
 
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
+    public void setProductID(Integer productID) {
+        this.productID = productID;
     }
-
-    
 }
