@@ -12,10 +12,9 @@ public class Orders {
     private Integer orderID;
     
     private Integer userID;
-    private Integer productID;
-    private String name;
+    private String cartItems; // Updated to store the list of items in the cart as a JSON or serialized string
+    private Double total; // Total price of the order
 
-    
     // Getters and Setters
 
     public Integer getUserID() {
@@ -26,12 +25,20 @@ public class Orders {
         this.userID = userID;
     }
 
-    public String getName(){
-        return name;
+    public String getCartItems() {
+        return cartItems;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCartItems(String cartItems) {
+        this.cartItems = cartItems;
+    }
+
+    public Double getTotal() {
+        return total;
+    }
+
+    public void setTotal(Double total) {
+        this.total = total;
     }
 
     public Integer getOrderID() {
@@ -42,7 +49,21 @@ public class Orders {
         return productID;
     }
 
-    public void setProductID(Integer productID) {
-        this.productID = productID;
+    public void setOrderID(Integer orderID) {
+        this.orderID = orderID;
+    }
+
+    // Override equals and hashCode based on your needs
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Orders orders = (Orders) o;
+        return Objects.equals(orderID, orders.orderID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderID);
     }
 }

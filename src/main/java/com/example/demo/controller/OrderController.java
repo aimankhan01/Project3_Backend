@@ -2,8 +2,6 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Orders;
 import com.example.demo.repository.OrderRepository;
-import com.example.demo.entity.Orders;
-import com.example.demo.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,19 +40,20 @@ public class OrderController {
         return orderRepository.findOrderByUserID(userID);
     }
 
+    // Create a new Order
     @PostMapping("/create")
-public ResponseEntity<Orders> createOrder(@RequestBody Orders newOrderData) {
-    // Create a new Orders object from the request body
-    Orders newOrder = new Orders();
-    newOrder.setUserID(newOrderData.getUserID());
-    newOrder.setProductID(newOrderData.getProductID());  // Update this line if your entity has the setter method
-    newOrder.setName(newOrderData.getName()); // Assuming Orders entity has a name field
+    public ResponseEntity<Orders> createOrder(@RequestBody OrderDTO orderDTO) {
+        Orders newOrder = new Orders();
+        newOrder.setUserID(orderDTO.getUserID());
+        newOrder.setCartItems(orderDTO.getCartItems());
+        newOrder.setTotal(orderDTO.getTotal());
 
-    // Save the new Order to the repository
-    Orders savedOrder = orderRepository.save(newOrder);
-    // Return the saved Order as JSON response
-    return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
-}
+        // Save the new Order to the repository
+        Orders savedOrder = orderRepository.save(newOrder);
+
+        // Return the saved Order as JSON response
+        return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
+    }
 
     // Update an existing Order
     @PatchMapping("/update")
@@ -72,9 +71,9 @@ public ResponseEntity<Orders> createOrder(@RequestBody Orders newOrderData) {
         }
     }
 
-    // Delete an Order by ID
+    // Delete a Order by ID
     @DeleteMapping("/delete")
-    public ResponseEntity<String> deleteOrder(@RequestParam(value = "OrderID") Integer orderID) {
+    public ResponseEntity<String> deleteOrder(@RequestParam(value = "orderID") Integer orderID) {
         if (orderRepository.existsById(orderID)) {
             orderRepository.deleteById(orderID);
             return new ResponseEntity<>("Order deleted successfully!", HttpStatus.OK);
